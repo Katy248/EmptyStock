@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EmptyStock.Mvc.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230523113140_Migration0001")]
-    partial class Migration0001
+    [Migration("20230523115048_Migration0005")]
+    partial class Migration0005
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -46,6 +46,10 @@ namespace EmptyStock.Mvc.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -437,12 +441,17 @@ namespace EmptyStock.Mvc.Migrations
             modelBuilder.Entity("EmptyStock.Domain.Models.Stock.Shipment", b =>
                 {
                     b.HasOne("EmptyStock.Domain.Models.Stock.Request", "Request")
-                        .WithOne()
+                        .WithOne("Shipment")
                         .HasForeignKey("EmptyStock.Domain.Models.Stock.Shipment", "RequestId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Request");
+                });
+
+            modelBuilder.Entity("EmptyStock.Domain.Models.Stock.Request", b =>
+                {
+                    b.Navigation("Shipment");
                 });
 #pragma warning restore 612, 618
         }

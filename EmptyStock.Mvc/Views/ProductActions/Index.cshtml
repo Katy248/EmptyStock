@@ -1,0 +1,49 @@
+﻿@model IEnumerable<EmptyStock.Domain.Models.Stock.ProductAction>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<div>
+    <a asp-controller="Receipts" asp-action="Create">Create new receipt</a>
+</div>
+<div>
+    <a asp-controller="Shipments" asp-action="Create">Create new shipment</a>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ChangeAmount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Creator)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.OrderByDescending(pa => pa.CreationDate))
+        {
+            <tr>
+                <td>
+                    <div class="@(item.ChangeAmount > 0 ? "link-success" : "link-danger")">@item.ChangeAmount</div>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Creator.UserName)
+                </td>
+                <td>
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

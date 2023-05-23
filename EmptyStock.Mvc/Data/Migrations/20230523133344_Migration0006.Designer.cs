@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EmptyStock.Mvc.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230523112008_Init migration")]
-    partial class Initmigration
+    [Migration("20230523133344_Migration0006")]
+    partial class Migration0006
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -46,6 +46,10 @@ namespace EmptyStock.Mvc.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -131,6 +135,9 @@ namespace EmptyStock.Mvc.Migrations
 
                     b.Property<int>("ChangeAmount")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("CreatorId")
                         .HasColumnType("int");
@@ -338,7 +345,9 @@ namespace EmptyStock.Mvc.Migrations
                     b.Property<int>("RequestId")
                         .HasColumnType("int");
 
-                    b.HasIndex("RequestId");
+                    b.HasIndex("RequestId")
+                        .IsUnique()
+                        .HasFilter("[RequestId] IS NOT NULL");
 
                     b.HasDiscriminator().HasValue("Shipment");
                 });
@@ -435,12 +444,17 @@ namespace EmptyStock.Mvc.Migrations
             modelBuilder.Entity("EmptyStock.Domain.Models.Stock.Shipment", b =>
                 {
                     b.HasOne("EmptyStock.Domain.Models.Stock.Request", "Request")
-                        .WithMany()
-                        .HasForeignKey("RequestId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .WithOne("Shipment")
+                        .HasForeignKey("EmptyStock.Domain.Models.Stock.Shipment", "RequestId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Request");
+                });
+
+            modelBuilder.Entity("EmptyStock.Domain.Models.Stock.Request", b =>
+                {
+                    b.Navigation("Shipment");
                 });
 #pragma warning restore 612, 618
         }

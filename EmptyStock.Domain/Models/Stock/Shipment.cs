@@ -8,7 +8,7 @@ namespace EmptyStock.Domain.Models.Stock;
 public class Shipment : ProductAction
 {
     public int RequestId { get; set; }
-    public Request Request { get; set; }
+    public Request? Request { get; set; }
     public override int ChangeAmount
     {
         get

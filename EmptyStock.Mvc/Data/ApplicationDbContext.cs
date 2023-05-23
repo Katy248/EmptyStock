@@ -20,9 +20,21 @@ public class ApplicationDbContext : IdentityDbContext<StockUser, IdentityRole<in
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
-        builder.Entity<Shipment>()
+        builder
+            .Entity<Shipment>()
             .HasOne(sh => sh.Request)
-            .WithOne().OnDelete(DeleteBehavior.Cascade);
+            .WithOne(r => r.Shipment)
+            .HasForeignKey<Request>()
+            .OnDelete(DeleteBehavior.NoAction);
+
+        builder
+            .Entity<Request>()
+            .HasOne(r => r.Shipment)
+            .WithOne(sh => sh.Request)
+            .IsRequired(false)
+            .HasForeignKey<Shipment>()
+            .OnDelete(DeleteBehavior.NoAction);
+
         base.OnModelCreating(builder);
     }
 }

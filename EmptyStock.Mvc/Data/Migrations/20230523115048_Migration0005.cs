@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace EmptyStock.Mvc.Migrations
 {
     /// <inheritdoc />
-    public partial class Initmigration : Migration
+    public partial class Migration0005 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -32,6 +32,7 @@ namespace EmptyStock.Mvc.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Surname = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -234,8 +235,7 @@ namespace EmptyStock.Mvc.Migrations
                         name: "FK_ProductActions_Requests_RequestId",
                         column: x => x.RequestId,
                         principalTable: "Requests",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
@@ -290,7 +290,9 @@ namespace EmptyStock.Mvc.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_ProductActions_RequestId",
                 table: "ProductActions",
-                column: "RequestId");
+                column: "RequestId",
+                unique: true,
+                filter: "[RequestId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Requests_CreatorId",

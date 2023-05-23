@@ -8,5 +8,6 @@ using Microsoft.AspNetCore.Identity;
 namespace EmptyStock.Domain.Models.Identity;
 public class StockUser : IdentityUser<int>
 {
-    public string Surname { get; set; }
+    public string FirstName { get; set; } = string.Empty;
+    public string Surname { get; set; } = string.Empty;
 }

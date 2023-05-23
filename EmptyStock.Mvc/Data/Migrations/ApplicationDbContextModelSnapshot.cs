@@ -44,6 +44,10 @@ namespace EmptyStock.Mvc.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -128,6 +132,9 @@ namespace EmptyStock.Mvc.Migrations
 
                     b.Property<int>("ChangeAmount")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("CreatorId")
                         .HasColumnType("int");
@@ -434,12 +441,17 @@ namespace EmptyStock.Mvc.Migrations
             modelBuilder.Entity("EmptyStock.Domain.Models.Stock.Shipment", b =>
                 {
                     b.HasOne("EmptyStock.Domain.Models.Stock.Request", "Request")
-                        .WithOne()
+                        .WithOne("Shipment")
                         .HasForeignKey("EmptyStock.Domain.Models.Stock.Shipment", "RequestId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Request");
+                });
+
+            modelBuilder.Entity("EmptyStock.Domain.Models.Stock.Request", b =>
+                {
+                    b.Navigation("Shipment");
                 });
 #pragma warning restore 612, 618
         }
