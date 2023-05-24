@@ -35,7 +35,6 @@ public class ShipmentsController : Controller
     // GET: Shipments/Create
     public IActionResult Create()
     {
-        ViewData["ProductId"] = new SelectList(_context.Products, "Id", "Name");
         ViewData["RequestId"] = new SelectList(_context.Requests.Where(r => r.Shipment == null), "Id", "Id");
         return View(new Shipment { CreatorId = int.Parse(_userManager.GetUserId(User)!)});
     }
@@ -45,11 +44,24 @@ public class ShipmentsController : Controller
     // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create([Bind("RequestId,ChangeAmount,ProductId,CreatorId,Id")] Shipment shipment)
+    public async Task<IActionResult> Create([Bind("RequestId,ProductId,CreatorId,Id")] Shipment shipment)
     {
+        var request = await _context.Requests.FindAsync(shipment.RequestId)!;
+        var productsCount = request.Count;
+
+        IEnumerable<ProductAction> productActions = (_context.Shipments.Include(s => s.Request).Where(s => s.ProductId == request.ProductId) as IEnumerable<ProductAction>).Concat(
+            _context.Receipts.Where(r => r.ProductId == request.ProductId));
+
+        var stockProducts = productActions.Sum(pa => pa.ChangeAmount);
+        if (productsCount > stockProducts)
+        {
+            ModelState.AddModelError("", "There are no products to ship");
+            return View(shipment);
+        }
         if (ModelState.IsValid)
         {
             shipment.CreationDate = DateTime.UtcNow;
+            shipment.Product = await _context.Products.FirstOrDefaultAsync(p => p.Id == _context.Requests.Find(shipment.RequestId).ProductId);
             _context.Add(shipment);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
