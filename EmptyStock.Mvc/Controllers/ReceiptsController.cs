@@ -35,7 +35,7 @@ public class ReceiptsController : Controller
     // GET: Receipts/Create
     public IActionResult Create()
     {
-        ViewData["ProductId"] = new SelectList(_context.Products, "Id", "Description");
+        ViewData["ProductId"] = new SelectList(_context.Products, "Id", "Name");
         return View(new Receipt { CreatorId = int.Parse(_userManager.GetUserId(User)!) });
     }
 

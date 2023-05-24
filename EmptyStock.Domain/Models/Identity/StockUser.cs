@@ -10,4 +10,5 @@ public class StockUser : IdentityUser<int>
 {
     public string FirstName { get; set; } = string.Empty;
     public string Surname { get; set; } = string.Empty;
+    public string ShortName => $"{Surname} {FirstName.FirstOrDefault()}.";
 }

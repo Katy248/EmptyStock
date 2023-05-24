@@ -16,9 +16,17 @@ public class ProductActionsController : Controller
 
     public async Task<IActionResult> Index()
     {
-        IEnumerable<ProductAction> actions = (await _context.Receipts.Include(a => a.Creator).Include(a => a.Product).ToArrayAsync())
+        IEnumerable<ProductAction> actions = (await _context.Receipts
+            .Include(a => a.Creator)
+            .Include(a => a.Product)
+            .ToArrayAsync())
             .AsEnumerable<ProductAction>()
-            .Concat(await _context.Shipments.Include(a => a.Creator).Include(a => a.Product).Include(s => s.Request).ToArrayAsync());
+            .Concat(await _context.Shipments
+            .Include(a => a.Creator)
+            .Include(a => a.Product)
+            .Include(s => s.Request)
+            .ToArrayAsync());
         return View(actions);
     }
+
 }

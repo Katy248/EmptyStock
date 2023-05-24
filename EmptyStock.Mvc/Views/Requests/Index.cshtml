@@ -46,7 +46,7 @@
                 @item.Product.Price
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Creator.UserName)
+                @item.Creator.ShortName
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Редактировать</a> |
