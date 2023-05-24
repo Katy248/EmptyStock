@@ -1,25 +1,25 @@
 ﻿@model IEnumerable<EmptyStock.Domain.Models.Stock.Product>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Продукты";
 }
 
-<h1>Index</h1>
+<h1>Продукты</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a class="btn btn-primary" asp-action="Create">Создать</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+              Наименование
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Description)
+               Описание
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Price)
+                Цена
             </th>
             <th></th>
         </tr>
@@ -37,8 +37,8 @@
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Id">Редактировать</a> |
+                <a class="link-danger" asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
             </td>
         </tr>
 }

@@ -1,28 +1,28 @@
 ﻿@model IEnumerable<EmptyStock.Domain.Models.Stock.Request>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Запросы";
 }
 
-<h1>Index</h1>
+<h1>Запросы</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a class="btn btn-primary" asp-action="Create">Создать</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Cost)
+                Стоимость
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Count)
+               Количество
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Product)
+               Наименование продукта
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Creator)
+               Создатель
             </th>
             <th></th>
         </tr>
@@ -32,20 +32,20 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Cost)
-            </td>
+            </td>   
             <td>
                 @Html.DisplayFor(modelItem => item.Count)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Product.Description)
+                @Html.DisplayFor(modelItem => item.Product.Name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Creator.FirstName)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Id">Редактировать</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Детали</a> |
+                <a class="link-danger" asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
             </td>
         </tr>
 }

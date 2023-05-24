@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<EmptyStock.Domain.Models.Stock.ProductAction>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Действия с продуктами";
 }
 
-<h1>Index</h1>
+<h1>Действия с продуктами</h1>
 
 <div>
     <a asp-controller="Receipts" asp-action="Create">Create new receipt</a>
@@ -16,13 +16,13 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.ChangeAmount)
+                Изменение количества
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Product)
+                Продукт
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Creator)
+                Создатель
             </th>
             <th></th>
         </tr>
