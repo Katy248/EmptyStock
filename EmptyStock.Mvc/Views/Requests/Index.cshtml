@@ -19,7 +19,10 @@
                Количество
             </th>
             <th>
-               Идентификатор
+               Наименование продукта
+            </th>
+            <th>
+               Цена продукта
             </th>
             <th>
                Создатель
@@ -40,7 +43,10 @@
                 @Html.DisplayFor(modelItem => item.Product.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Creator.FirstName)
+                @item.Product.Price
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Creator.UserName)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Редактировать</a> |
