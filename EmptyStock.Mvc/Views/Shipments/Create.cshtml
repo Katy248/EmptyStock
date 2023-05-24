@@ -14,11 +14,11 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input asp-for="CreatorId" hidden/>
             <div class="form-group">
-                <label asp-for="RequestId" class="control-label">Идентификатор поставки</label>
+                <label asp-for="RequestId" class="control-label">Идентификатор заказа</label>
                 <select asp-for="RequestId" class ="form-control" asp-items="ViewBag.RequestId"></select>
             </div>
             <div class="form-group">
-                <label asp-for="ProductId" class="control-label">Идентификатор продукта</label>
+                <label asp-for="ProductId" class="control-label">Продукт</label>
                 <select asp-for="ProductId" class ="form-control" asp-items="ViewBag.ProductId"></select>
             </div>
             <div class="form-group mt-2">

@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/EmptyStock.Mvc.styles.css" asp-append-version="true" />
 </head>
-<body>
+<body class="bg-opacity-25" style="background-image: url('/img/stock-bg.jpg'); background-size: cover;  background-position: center;">
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
@@ -40,7 +40,7 @@
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div class="container bg-white p-4 bg-opacity-90 rounded-3">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>

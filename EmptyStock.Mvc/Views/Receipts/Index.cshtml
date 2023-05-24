@@ -33,10 +33,10 @@
             </td>
             
             <td>
-                @Html.DisplayFor(modelItem => item.Product.Description)
+                @Html.DisplayFor(modelItem => item.Product.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Creator.FirstName)
+                @Html.DisplayFor(modelItem => item.Creator.UserName)
             </td>
             <td>
                 <a class="link-danger" asp-action="Delete" asp-route-id="@item.Id">Удалить</a>

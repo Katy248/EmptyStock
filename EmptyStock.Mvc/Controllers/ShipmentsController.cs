@@ -35,7 +35,7 @@ public class ShipmentsController : Controller
     // GET: Shipments/Create
     public IActionResult Create()
     {
-        ViewData["ProductId"] = new SelectList(_context.Products, "Id", "Description");
+        ViewData["ProductId"] = new SelectList(_context.Products, "Id", "Name");
         ViewData["RequestId"] = new SelectList(_context.Requests.Where(r => r.Shipment == null), "Id", "Id");
         return View(new Shipment { CreatorId = int.Parse(_userManager.GetUserId(User)!)});
     }
@@ -54,7 +54,7 @@ public class ShipmentsController : Controller
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-        ViewData["ProductId"] = new SelectList(_context.Products, "Id", "Description", shipment.ProductId);
+        ViewData["ProductId"] = new SelectList(_context.Products, "Id", "Name", shipment.ProductId);
         ViewData["RequestId"] = new SelectList(_context.Requests.Where(r => r.Shipment == null), "Id", "Id", shipment.RequestId);
         return View(shipment);
     }
