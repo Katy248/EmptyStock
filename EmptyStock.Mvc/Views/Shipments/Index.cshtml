@@ -1,28 +1,28 @@
 ﻿@model IEnumerable<EmptyStock.Domain.Models.Stock.Shipment>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Отгрузка";
 }
 
-<h1>Index</h1>
+<h1>Отгрузка</h1>
 
 <p>
-    <a class="btn btn-primary" asp-action="Create">Create New</a>
+    <a class="btn btn-primary" asp-action="Create">Создать</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Request)
+                Заказ
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ChangeAmount)
+                Количество
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Product)
+                Продукт
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Creator)
+                Создатель
             </th>
             <th></th>
         </tr>
@@ -43,9 +43,7 @@
                 @Html.DisplayFor(modelItem => item.Creator.FirstName)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a class="link-danger" asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
             </td>
         </tr>
 }

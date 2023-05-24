@@ -1,28 +1,26 @@
 ﻿@model IEnumerable<EmptyStock.Domain.Models.Stock.Receipt>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Поставки";
 }
 
-<h1>Index</h1>
+<h1>Поставки</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a class="btn btn-primary" asp-action="Create">Создать</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Count)
+                Количество
+            </th>
+            
+            <th>
+                Продукт
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ChangeAmount)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Product)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Creator)
+               Создатель
             </th>
             <th></th>
         </tr>
@@ -33,9 +31,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Count)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ChangeAmount)
-            </td>
+            
             <td>
                 @Html.DisplayFor(modelItem => item.Product.Description)
             </td>
@@ -43,9 +39,7 @@
                 @Html.DisplayFor(modelItem => item.Creator.FirstName)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a class="link-danger" asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
             </td>
         </tr>
 }

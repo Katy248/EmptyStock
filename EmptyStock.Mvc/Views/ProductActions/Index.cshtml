@@ -7,16 +7,15 @@
 <h1>Действия с продуктами</h1>
 
 <div>
-    <a asp-controller="Receipts" asp-action="Create">Create new receipt</a>
+    <a class="btn btn-primary" asp-controller="Receipts" asp-action="Create">Создать новую поставку</a>
+    <a class="btn btn-primary" asp-controller="Shipments" asp-action="Create">Создать новую отгрузку</a>
 </div>
-<div>
-    <a asp-controller="Shipments" asp-action="Create">Create new shipment</a>
-</div>
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                Изменение количества
+                Измененное количества
             </th>
             <th>
                 Продукт
@@ -41,7 +40,7 @@
                     @Html.DisplayFor(modelItem => item.Creator.UserName)
                 </td>
                 <td>
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a class="link-danger" asp-action="Delete" asp-route-id="@item.Id">Удалить  </a>
                 </td>
             </tr>
         }
