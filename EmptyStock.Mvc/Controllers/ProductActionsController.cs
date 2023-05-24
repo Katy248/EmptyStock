@@ -1,10 +1,12 @@
 ﻿using EmptyStock.Domain.Models.Stock;
 using EmptyStock.Mvc.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace EmptyStock.Mvc.Controllers;
 
+[Authorize]
 public class ProductActionsController : Controller
 {
     private readonly ApplicationDbContext _context;
