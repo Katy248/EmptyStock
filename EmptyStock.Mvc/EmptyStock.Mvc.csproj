@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Views\Home\index.css" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="wwwroot\raspredelitelnyy-sklad-1.jpg" />
   </ItemGroup>
 

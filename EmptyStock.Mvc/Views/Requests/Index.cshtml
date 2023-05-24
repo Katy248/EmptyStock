@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<EmptyStock.Domain.Models.Stock.Request>
 
 @{
-    ViewData["Title"] = "Запросы";
+    ViewData["Title"] = "Заказы";
 }
 
-<h1>Запросы</h1>
+<h1>Заказы</h1>
 
 <p>
     <a class="btn btn-primary" asp-action="Create">Создать</a>
@@ -50,7 +50,6 @@
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Редактировать</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Детали</a> |
                 <a class="link-danger" asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
             </td>
         </tr>
