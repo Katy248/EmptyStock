@@ -4,4 +4,13 @@
 
 - Clone repository
 - Update database with following command in package manager:
-```Update-Database```
+
+```sh
+Update-Database
+```
+
+- Run application with following command in terminal:
+
+```sh
+dotnet run --project EmptyStock.Mvc
+```
