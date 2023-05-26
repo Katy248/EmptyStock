@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace EmptyStock.Mvc.Controllers;
 
-[Authorize]
+[Authorize(Roles = "admin,manager,director")]
 public class RequestsController : Controller
 {
     private readonly ApplicationDbContext _context;

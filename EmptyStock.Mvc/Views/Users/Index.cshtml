@@ -1,0 +1,45 @@
+﻿@model IEnumerable<EmptyStock.Domain.Models.Identity.StockUser>
+
+@{
+    ViewData["Title"] = "Пользователи";
+}
+
+<h1>Пользователи</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Имя пользователя
+            </th>
+            <th>
+                Фамилия, имя
+            </th>
+            <th>
+                Почта
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.UserName
+                </td>
+                <td>
+                    @item.ShortName
+                </td>
+                <td>
+                    @item.Email
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Редактировать</a> |
+                    <a class="link-danger" asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

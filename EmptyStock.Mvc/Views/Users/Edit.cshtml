@@ -1,0 +1,22 @@
+﻿@model EditUserViewModel
+@{
+    ViewData["Title"] = "Изменение пользователя";
+
+    var roleItems = new SelectListItem[]
+    {
+        new SelectListItem("Администратор", IdentityHelpers.GetRole("admin")),
+        new SelectListItem("Работник склада", IdentityHelpers.GetRole("stockWorker")),
+        new SelectListItem("Менеджер", IdentityHelpers.GetRole("manager")),
+        new SelectListItem("Директор", IdentityHelpers.GetRole("director")),
+    };
+}
+<div class="text-center h1">@Model.Username</div>
+<form asp-action="Edit" method="post">
+    <input asp-for="UserId" hidden/>
+    <input asp-for="Username" hidden/>
+    <div class="form-group mb-3">
+        <label class="form-label">Роль</label>
+        <select class="form-control" asp-items="roleItems" asp-for="Role"></select>
+    </div>
+    <button class="btn btn-primary form-control" type="submit">Сохранить</button>
+</form>

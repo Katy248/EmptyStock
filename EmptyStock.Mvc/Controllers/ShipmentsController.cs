@@ -13,7 +13,7 @@ using EmptyStock.Domain.Models.Identity;
 
 namespace EmptyStock.Mvc.Controllers;
 
-[Authorize]
+[Authorize(Roles = "admin,stockWorker,director")]
 public class ShipmentsController : Controller
 {
     private readonly ApplicationDbContext _context;

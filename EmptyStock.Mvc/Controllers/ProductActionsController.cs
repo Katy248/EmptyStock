@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EmptyStock.Mvc.Controllers;
 
-[Authorize]
+[Authorize(Roles = "admin,stockWorker,director")]
 public class ProductActionsController : Controller
 {
     private readonly ApplicationDbContext _context;

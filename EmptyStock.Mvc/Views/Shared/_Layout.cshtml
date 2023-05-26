@@ -1,14 +1,21 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<StockUser> SignInManager
+@inject UserManager<StockUser> UserManager
+@{
+    var user = await UserManager.GetUserAsync(User);
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - EmptyStock.Mvc</title>
+    <title>@ViewData["Title"] - EmptyStock</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/EmptyStock.Mvc.styles.css" asp-append-version="true" />
 </head>
-<body class="bg-opacity-25" style="background-image: url('/img/stock-bg.jpg'); background-size: cover;  background-position: center;">
+@*style="background-image: url('/img/stock-bg.jpg'); background-size: cover;  background-position: center;"*@
+<body class="bg-opacity-25" >
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
@@ -19,7 +26,56 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            @if (await UserManager.IsInRoleAsync(user, "admin"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Index">Пользователи</a>
+                                </li>
+                            }
+                            @if (await UserManager.IsInRoleAsync(user, "director"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Index">Продукты</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Requests" asp-action="Index">Заказы</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="ProductActions" asp-action="Index">Действия с продуктами</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Receipts" asp-action="Index">Поставки</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Shipments" asp-action="Index">Отгрузки</a>
+                                </li>
+                            }
+                            @if (await UserManager.IsInRoleAsync(user, "manager"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Index">Продукты</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Requests" asp-action="Index">Заказы</a>
+                                </li>
+                            }
+                            @if (await UserManager.IsInRoleAsync(user, "stockWorker"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Receipts" asp-action="Index">Поставки</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Shipments" asp-action="Index">Отгрузки</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="ProductActions" asp-action="Index">Действия с продуктами</a>
+                                </li>
+                            }
+                        }
+                        
+                        @*<li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Index">Продукты</a>
                         </li>
                         <li class="nav-item">
@@ -33,14 +89,14 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Shipments" asp-action="Index">Отгрузки</a>
-                        </li>
+                        </li>*@
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container bg-white p-4 bg-opacity-90 rounded-3">
+    <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>

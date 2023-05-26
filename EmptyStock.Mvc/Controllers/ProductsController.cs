@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace EmptyStock.Mvc.Controllers;
 
-[Authorize]
+[Authorize(Roles = "admin,manager,director")]
 public class ProductsController : Controller
 {
     private readonly ApplicationDbContext _context;
