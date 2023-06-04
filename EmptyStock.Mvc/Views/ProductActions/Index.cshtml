@@ -1,14 +1,15 @@
 ﻿@model IEnumerable<EmptyStock.Domain.Models.Stock.ProductAction>
 
 @{
-    ViewData["Title"] = "Действия с продуктами";
+    ViewData["Title"] = "Документы";
 }
 
-<h1>Действия с продуктами</h1>
+<h1>@ViewData["Title"]</h1>
 
 <div>
     <a class="btn btn-primary" asp-controller="Receipts" asp-action="Create">Создать новую поставку</a>
     <a class="btn btn-primary" asp-controller="Shipments" asp-action="Create">Создать новую отгрузку</a>
+    <a class="btn btn-info">Сортировать по складам</a>
 </div>
 
 <table class="table">
@@ -21,8 +22,15 @@
                 Продукт
             </th>
             <th>
+                Затраты
+            </th>
+            <th>
                 Создатель
             </th>
+            <th>
+                
+            </th>
+            
         </tr>
     </thead>
     <tbody>
@@ -33,10 +41,18 @@
                     <div class="@(item.ChangeAmount > 0 ? "link-success" : "link-danger")">@item.ChangeAmount</div>
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Product.Name)
+                    @item.Product.Name - @item.ProductId
+                </td>
+                <td>
+                    <div class="@(item.ChangeAmount <= 0 ? "link-success" : "link-danger")">
+                        @(item.Product.Price * -item.ChangeAmount)
+                    </div>
                 </td>
                 <td>
                     @item.Creator.ShortName
+                </td>
+                <td>
+                    <a asp-action="CreateBill" asp-route-id="@item.Id">Создать накладную</a>
                 </td>
               
             </tr>

@@ -42,6 +42,10 @@ public class RequestsController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create([Bind("ProductId,CreatorId,Cost,Count,Id")] Request request)
     {
+        if (request.Count <= 0)
+        {
+            ModelState.AddModelError("Count", "Неверно указано количество");
+        }
         if (ModelState.IsValid)
         {
             _context.Add(request);

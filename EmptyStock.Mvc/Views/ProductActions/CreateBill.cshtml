@@ -1,0 +1,102 @@
+﻿@model CreateBillViewModel
+@{
+    ViewData["Title"] = "Накладная";
+}
+<div class="row">
+    <div class="col-12 text-end">
+        от @DateTime.Now
+    </div>
+
+    <div class="text-center h2">
+        Накладная № @Model.ProductAction.Id
+    </div>
+    @switch (Model.ProductAction)
+    {
+        case Receipt r:
+            {
+                <div class="col-12 h5">
+                    Поставка
+                </div>
+                <div class="col-12">
+                    Кому: @Model.User.ShortName
+                </div>
+                <div class="col-12">
+                    От кого: Поставщик
+                </div>
+                
+            }
+            break;
+        case Shipment s:
+            {
+                <div class="col-12 h5">
+                    Отгрузка
+                </div>
+                <div class="col-12">
+                    Кому: Заказчик
+                </div>
+                <div class="col-12">
+                    От кого: @Model.User.ShortName
+                </div>
+            }
+            break;
+    }
+    <div class="col-12 mt-5 row">
+        <div class="col-3 h5">
+            Наименование товара:
+        </div>
+        <div class="col-3 h5">
+            Цена товара:
+        </div>
+        <div class="col-3 h5">
+            Количество:
+        </div>
+        <div class="col-3 h5">
+            Итого:
+        </div>
+        <div class="col-3">
+            @Model.ProductAction.Product.Name
+        </div>
+        <div class="col-3">
+            @Model.ProductAction.Product.Price
+        </div>
+        <div class="col-3">
+            @Model.ProductAction.ChangeAmount шт.
+        </div>
+        <div class="col-3">
+            @(Model.ProductAction.Product.Price * Math.Abs(Model.ProductAction.ChangeAmount))
+        </div>
+    </div>
+    
+    <div class="col-12 row mt-5"> 
+        <div class="col-6 h4">
+            НДС (18%):
+        </div>
+        <div class="col-6 h4">
+            @(Model.ProductAction.Product.Price * Math.Abs(Model.ProductAction.ChangeAmount) * 0.18m)
+        </div>
+    </div>
+    <div class="col-12 row mt-5">
+        <div class="col-3 h5">
+            Сдал:
+        </div>
+        <div class="col-3 h5 border-bottom">
+            
+        </div>
+        <div class="col-3 h5">
+            Принял:
+        </div>
+        <div class="col-3 h5 border-bottom">
+            
+        </div>
+        <div class="col-3 h5"></div>
+        <div class="col-3 h5 text-center text-muted small">
+            Подпись
+        </div>
+        <div class="col-3 h5"></div>
+        <div class="col-3 h5 text-center text-muted small">
+            Подпись
+        </div>
+    </div>
+    
+</div>
+

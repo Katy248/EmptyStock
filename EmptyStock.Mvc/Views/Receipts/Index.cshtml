@@ -13,11 +13,13 @@
     <thead>
         <tr>
             <th>
+                Продукт
+            </th>
+            <th>
                 Количество
             </th>
-            
             <th>
-                Продукт
+                Стоимость
             </th>
             <th>
                Создатель
@@ -27,14 +29,17 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
+            <tr>
+                <td>
+                    @item.Product.Name
+                </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Count)
             </td>
-            
             <td>
-                @Html.DisplayFor(modelItem => item.Product.Name)
+                @(item.Product.Price * item.ChangeAmount)
             </td>
+            
             <td>
                 @item.Creator.ShortName
             </td>

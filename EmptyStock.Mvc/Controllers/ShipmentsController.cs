@@ -44,8 +44,13 @@ public class ShipmentsController : Controller
     // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create([Bind("RequestId,ProductId,CreatorId,Id")] Shipment shipment)
+    public async Task<IActionResult> Create([Bind] Shipment shipment)
     {
+        if (shipment.ChangeAmount <= 0)
+        {
+            ModelState.AddModelError("ChangeAmount", "Неверно указано количество");
+        }
+
         var request = await _context.Requests.FindAsync(shipment.RequestId)!;
         var productsCount = request.Count;
 

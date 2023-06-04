@@ -8,6 +8,5 @@ namespace EmptyStock.Domain.Models.Stock;
 public class Product : DbEntity
 {
     public string Name { get; set; }
-    public string Description { get; set; }
     public decimal Price { get; set; }
 }

@@ -10,6 +10,7 @@ using EmptyStock.Mvc.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using EmptyStock.Domain.Models.Identity;
+using Azure.Core;
 
 namespace EmptyStock.Mvc.Controllers;
 
@@ -44,8 +45,12 @@ public class ReceiptsController : Controller
     // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create([Bind("Count,ChangeAmount,ProductId,CreatorId,Id")] Receipt receipt)
+    public async Task<IActionResult> Create([Bind] Receipt receipt)
     {
+        if (receipt.Count <= 0)
+        {
+            ModelState.AddModelError("Count", "Неверно указано количество");
+        }
         if (ModelState.IsValid)
         {
             receipt.CreationDate = DateTime.UtcNow;
@@ -53,7 +58,7 @@ public class ReceiptsController : Controller
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-        ViewData["ProductId"] = new SelectList(_context.Products, "Id", "Description", receipt.ProductId);
+        ViewData["ProductId"] = new SelectList(_context.Products, "Id", "Name", receipt.ProductId);
         return View(receipt);
     }
 

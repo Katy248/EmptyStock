@@ -13,11 +13,12 @@
     <thead>
         <tr>
             <th>
-              Наименование
+              Артикул
             </th>
             <th>
-               Описание
+              Наименование
             </th>
+
             <th>
                 Цена
             </th>
@@ -28,10 +29,10 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                @item.Id
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Description)
+                @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Price)
