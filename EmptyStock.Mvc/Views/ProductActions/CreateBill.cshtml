@@ -72,7 +72,7 @@
             НДС (18%):
         </div>
         <div class="col-6 h4">
-            @(Model.ProductAction.Product.Price * Math.Abs(Model.ProductAction.ChangeAmount) * 0.18m)
+            @(MathF.Round((float)(Model.ProductAction.Product.Price * Math.Abs(Model.ProductAction.ChangeAmount) * 0.18m), 2))
         </div>
     </div>
     <div class="col-12 row mt-5">
