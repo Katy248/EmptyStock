@@ -1,10 +1,10 @@
-﻿@model IEnumerable<EmptyStock.Domain.Models.Stock.Product>
+﻿@model ProductsViewModel
 
 @{
-    ViewData["Title"] = "Продукты";
+    ViewData["Title"] = "Склад";
 }
 
-<h1>Продукты</h1>
+<h1>@ViewData["Title"]</h1>
 
 <p>
     <a class="btn btn-primary" asp-action="Create">Создать</a>
@@ -22,11 +22,14 @@
             <th>
                 Цена
             </th>
+            <th>
+                Количество на складе
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model.Products) {
         <tr>
             <td>
                 @item.Id
@@ -36,6 +39,14 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                    @(Model.Receipts
+                    .Where(r => r.ProductId == item.Id)
+                    .Sum(r => r.Count) - 
+                    Model.Shipments
+                    .Where(r => r.ProductId == item.Id)
+                    .Sum(s => s.ChangeAmount))
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Редактировать</a> |

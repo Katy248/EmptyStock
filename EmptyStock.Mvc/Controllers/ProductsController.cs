@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using EmptyStock.Domain.Models.Stock;
 using EmptyStock.Mvc.Data;
 using Microsoft.AspNetCore.Authorization;
+using EmptyStock.Mvc.Models;
 
 namespace EmptyStock.Mvc.Controllers;
 
@@ -24,9 +25,13 @@ public class ProductsController : Controller
     // GET: Products
     public async Task<IActionResult> Index()
     {
-          return _context.Products != null ? 
-                      View(await _context.Products.ToListAsync()) :
-                      Problem("Entity set 'ApplicationDbContext.Products'  is null.");
+        var model = new ProductsViewModel
+        {
+            Products = await _context.Products.ToListAsync(),
+            Shipments = await _context.Shipments.Include(s => s.Request).ToListAsync(),
+            Receipts = await _context.Receipts.ToListAsync(),
+        };
+          return View(model);
     }
     // GET: Products/Create
     public IActionResult Create()

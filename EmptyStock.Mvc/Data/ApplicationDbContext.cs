@@ -27,6 +27,36 @@ public class ApplicationDbContext : IdentityDbContext<StockUser, IdentityRole<in
             .HasForeignKey<Request>()
             .OnDelete(DeleteBehavior.NoAction);
 
+        /*builder.Entity<Shipment>()
+            .HasOne(s => s.Product)
+            .WithMany(p => p.Shipments)
+            .HasForeignKey(s => s.ProductId);
+        
+        builder.Entity<Receipt>()
+            .HasOne(s => s.Product)
+            .WithMany(p => p.Receipts)
+            .HasForeignKey(s => s.ProductId);*/
+        
+        builder.Entity<ProductAction>()
+            .HasOne(s => s.Product)
+            .WithMany(p => p.ProductActions)
+            .HasForeignKey(s => s.ProductId);
+
+        /*builder.Entity<Product>()
+            .HasMany(p => p.Shipments)
+            .WithOne(s => s.Product)
+            .HasForeignKey(s => s.ProductId);
+        
+        builder.Entity<Product>()
+            .HasMany(p => p.Receipts)
+            .WithOne(s => s.Product)
+            .HasForeignKey(s => s.ProductId);*/
+        
+        builder.Entity<Product>()
+            .HasMany(p => p.ProductActions)
+            .WithOne(s => s.Product)
+            .HasForeignKey(s => s.ProductId);
+
         builder
             .Entity<Request>()
             .HasOne(r => r.Shipment)
