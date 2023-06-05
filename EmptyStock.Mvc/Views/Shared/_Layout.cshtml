@@ -34,7 +34,7 @@
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Index">Пользователи</a>
                                 </li>
                             }
-                            @if (await UserManager.IsInRoleAsync(user, "director"))
+                            else if (await UserManager.IsInRoleAsync(user, "director"))
                             {
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Index">Продукты</a>
@@ -52,7 +52,7 @@
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Shipments" asp-action="Index">Отгрузки</a>
                                 </li>
                             }
-                            @if (await UserManager.IsInRoleAsync(user, "manager"))
+                            else if (await UserManager.IsInRoleAsync(user, "manager"))
                             {
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Index">Продукты</a>
@@ -61,7 +61,7 @@
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Requests" asp-action="Index">Заказы</a>
                                 </li>
                             }
-                            @if (await UserManager.IsInRoleAsync(user, "stockWorker"))
+                            else if (await UserManager.IsInRoleAsync(user, "stockWorker"))
                             {
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Receipts" asp-action="Index">Поставки</a>
