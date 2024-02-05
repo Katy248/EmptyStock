@@ -1,5 +1,8 @@
 # EmptyStock
 
+Stock management system.
+Made this for my friend.
+
 ## Installation
 
 - Clone repository
